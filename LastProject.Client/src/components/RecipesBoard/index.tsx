@@ -1,6 +1,7 @@
 import React from 'react';
 import IRecipes from "../../Interfaces";
 import Recipe from "../Recipe";
+import './RecipesBoard.css';
 
 interface Props {
     items: IRecipes[]
@@ -9,12 +10,14 @@ interface Props {
 const RecipesBoard = ({ items } : Props) => {
     return (
         <section className="section">
-            <h2>recipes board</h2>
-            <p>number of Recipes: {items.length}</p>
-            { items.map(item => {
-                    return <Recipe key={item.idMeal} item={item} />
-                }
-            ) }
+            <h2 className="section-title">Recipes</h2>
+            {/*<p>number of Recipes: {items.length}</p>*/}
+            <div className="recipe-list">
+                { items.map(item => {
+                        return <Recipe key={item.idMeal} item={item} />
+                    }
+                ) }
+            </div>
         </section>
     );
 };

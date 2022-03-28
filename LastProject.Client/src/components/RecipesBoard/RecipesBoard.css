@@ -1,15 +1,4 @@
-/* dish */
-
-.recipe {
-    background: #fff;
-    box-shadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);;
-    transition: all 0.3s linear;
-    border-radius: 0.25rem;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    margin-bottom: 2rem;
-}
-.recipes-list {
+.recipe-list {
     width: var(--smallWidth);
     max-width: var(--fullWidth);
     margin: 0 auto;
@@ -19,17 +8,7 @@
 }
 
 @media screen and (min-width: 576px) {
-    .recipes-list {
+    .recipe-list {
         grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
     }
-}
-
-.recipe img {
-    height: 20rem;
-    object-fit: cover;
-    border-top-left-radius: var(--mainBorderRadius);
-    border-top-right-radius: var(--mainBorderRadius);
-}
-.recipe-footer {
-    padding: 0.8rem;
 }

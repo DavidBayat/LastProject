@@ -1,5 +1,7 @@
 import React from 'react';
 import IRecipes from "../../Interfaces";
+import './Recipe.css'
+
 interface Props {
     item: IRecipes
 }
@@ -7,10 +9,9 @@ interface Props {
 const Recipe = ({item} : Props) => {
     const { idMeal, strMeal, strMealThumb} = item
     return (
-        <article>
+        <article className="recipe">
             <img src={strMealThumb} alt={strMeal} />
             <h3>{strMeal}</h3>
-            <p>{strMealThumb}</p> 
         </article>
     );
 };
