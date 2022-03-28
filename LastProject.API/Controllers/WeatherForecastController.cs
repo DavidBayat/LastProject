@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace LastProject.API.Controllers;
-
+//try out
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
@@ -10,6 +10,7 @@ public class WeatherForecastController : ControllerBase
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
+int a = 1;
 
     private readonly ILogger<WeatherForecastController> _logger;
 
