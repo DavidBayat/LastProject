@@ -12,16 +12,15 @@ function App() {
         const data = await response.json();
         const { meals } = data;
         setRecipeList(meals);
-        console.log(meals.length)
     }
     useEffect(() => {
         fetchRecipes();
     },[]);
     
     return (
-    <>
+    <main>
       <RecipesBoard items={recipeList} />  
-    </>
+    </main>
   );
 }
 
