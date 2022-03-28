@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import RecipesBoard from "../RecipesBoard";
+import IRecipes from "../../Interfaces";
 
 function App() {
-    const [recipeList, setRecipeList] = useState([]);
+    const [recipeList, setRecipeList] = useState<IRecipes[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
 
     const fetchRecipes = async () => {
@@ -19,8 +20,7 @@ function App() {
     
     return (
     <>
-      <p>number of Recipes: {recipeList.length}</p>  
-      <RecipesBoard />  
+      <RecipesBoard items={recipeList} />  
     </>
   );
 }

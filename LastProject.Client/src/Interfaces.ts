@@ -1,8 +1,7 @@
 interface IRecipes {
-    id: number;
-    title: string;
-    description: string;
-    doneState: boolean;
+    strMeal: string;
+    strMealThumb: string;
+    idMeal: string;
 }
 
 export default IRecipes;
