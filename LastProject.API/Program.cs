@@ -1,4 +1,11 @@
+using LastProject.API.Controllers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using LastProject.API;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<UserContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("UserContext")));
 
 // Add services to the container.
 
@@ -6,6 +13,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IRecipeService, RecipeClient>();
 
 var app = builder.Build();
 
