@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using LastProject.API;
+using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
+using RestSharp;
+using System.Text.Json;
 
 namespace LastProject.API.Controllers
 {
@@ -13,43 +18,171 @@ namespace LastProject.API.Controllers
     [ApiController]
     public class RecipesController : ControllerBase
     {
-        private IRecipeService _service;
-        private GetRecipeResponse _recipe;
-        public RecipesController(IRecipeService service)
-        {
-            this._service = service;
-        }
-        [HttpGet]
-        public Task<RecipesResponse> GetRecipe()
-        {
-            var response = this._service.GetRecipe();
-            return response;
-        }
-
-
-        // GET: api/Cds
-        // [HttpGet]
-        // public async Task<ActionResult<GetRecipeResponse>> GetRecipeByIngredient (string searchByIngredient)
+        // private IRecipeService _service;
+        // private RecipesResponse _recipe;
+        // public RecipesController(IRecipeService service, RecipesResponse recipe)
         // {
-        //      var recipes = GetRecipe();   
-
-        //     var recipes = 
-        //         from c in
-        //         select c;
-
-        //     if (searchByIngredient == "")
-        //     {
-        //         cds = cds.OrderBy(c => c.Id);
-        //     }
-        //     else if(!String.IsNullOrEmpty(searchByIngredient))
-        //     {
-        //         cds = cds.Where((s => s.Genre.Name.Contains(searchByIngredient)));
-                
-        //         // add IF in case there are no vds for that genre! (List all CDs)
-        //     }
-            
-        //     return await cds.ToListAsync();
+        //     this._service = service;
+        //     this._recipe = recipe;
         // }
+
+
+        // [HttpGet]
+        // public Task<RecipesResponse> GetRecipe()
+        // {
+        //     var response = this._service.GetRecipe();
+        //     return response;
+        // }
+
+
+        // GET: api/Recepes/5
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<ApiRecepe>> GetRecepe(int id)
+        // {
+        //     //var user = await _recipe.ListOfRecipes
+
+        //     var part1 = _recipe.ListOfRecipes;
+
+        //     var part2 = (from p in part1
+        //                 where p.idMeal == id.ToString()
+        //                 select p).First();
+
+
+        //     if (part2 == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return part2;
+        // }
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetRecepeById (string id)
+        {
+            var client = new RestClient("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+
+            var request = new RestRequest();
+
+            var response = await client.ExecuteAsync(request);
+
+            var mealList = JsonSerializer.Deserialize<RecipesResponse>(response.Content);
+
+            if(id == null)
+                {
+                    return Ok(mealList);
+                }
+
+            var result = mealList.ListOfRecipes;
+            
+            var final = from r in result
+                    where r.idMeal == id
+                    select new SearchResultDTO{
+                        strMeal = r.strMeal,
+                        idMeal = r.idMeal,
+                        strMealThumb = r.strMealThumb
+                    };
+            return Ok(final);
+        }
+
+
+
+        [HttpGet("ingredients")]
+        public async Task<ActionResult> GetRecipeByIngredient (string searchByIngredient) //use param later
+        {
+            var client = new RestClient("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+
+            var request = new RestRequest();
+
+            var response = await client.ExecuteAsync(request);
+
+            var mealList = JsonSerializer.Deserialize<RecipesResponse>(response.Content);
+            
+            // fix it with always full list in case invalid string 
+            if(searchByIngredient == null)
+                {
+                    return Ok(mealList);
+                }
+
+            
+        var result = mealList.ListOfRecipes;
+            
+        var final = from r in result
+                    where r.Ingredients.Contains(searchByIngredient)
+                    select new SearchResultDTO {
+                        strMeal = r.strMeal,
+                        idMeal = r.idMeal,
+                        strMealThumb = r.strMealThumb
+                    };
+
+            return Ok(final);
+        }
+
+
     }
+
+    public class RecipesResponse
+    {
+        [JsonPropertyName("meals")]
+        public List<ApiRecepe>? ListOfRecipes { get; set; }
+    }
+
+
+    public class ApiRecepe 
+    {   
+        public string idMeal { get; set; }
+        public string strMeal { get; set; }
+        public string strMealThumb {get; set;}
+        
+        public List<string> Ingredients { 
+            get
+            {
+                return new List<string>()
+                {
+                    strIngredient1,
+                    strIngredient2, 
+                    strIngredient3,
+                    strIngredient4,
+                    strIngredient5,
+                    strIngredient6,
+                    strIngredient7,
+                    strIngredient8,
+                    strIngredient9,
+                    strIngredient10,
+                    strIngredient11,
+                    strIngredient12,
+                    strIngredient13,
+                    strIngredient14,
+                    strIngredient15,
+                    strIngredient16,
+                    strIngredient17,
+                    strIngredient18,
+                    strIngredient19,
+                    strIngredient20
+                    };
+             } 
+        }
+        public string strIngredient1 { get; set; }
+        public string strIngredient2 { get; set; }
+        public string strIngredient3 { get; set; }
+        public string strIngredient4 { get; set; }
+        public string strIngredient5 { get; set; }
+        public string strIngredient6 { get; set; }
+        public string strIngredient7 { get; set; }
+        public string strIngredient8 { get; set; }
+        public string strIngredient9 { get; set; }
+        public string strIngredient10 { get; set; }
+        public string strIngredient11 { get; set; }
+        public string strIngredient12 { get; set; }
+        public string strIngredient13 { get; set; }
+        public string strIngredient14 { get; set; }
+        public string strIngredient15 { get; set; }
+        public string strIngredient16 { get; set; }
+        public string strIngredient17 { get; set; }
+        public string strIngredient18 { get; set; }
+        public string strIngredient19 { get; set; }
+        public string strIngredient20 { get; set; }
+    
+}
 
 }
