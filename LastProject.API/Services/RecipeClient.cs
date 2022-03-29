@@ -28,8 +28,17 @@ public class GetRecipeResponse
 
     [JsonPropertyName("strMeal")]
     public string? RecipeName { get; set; }
+    public List<RecipeIngredient> Ingredients {get; set; }
    
 }
+
+public class RecipeIngredient 
+{
+    public string Id {get; set; }
+    [JsonPropertyName("strIngredient%")]
+    public string Ingredient { get; set; }
+}
+
 public class RecipesResponse
 {
     [JsonPropertyName("meals")]

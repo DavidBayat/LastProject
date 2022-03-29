@@ -14,6 +14,7 @@ namespace LastProject.API.Controllers
     public class RecipesController : ControllerBase
     {
         private IRecipeService _service;
+        private GetRecipeResponse _recipe;
         public RecipesController(IRecipeService service)
         {
             this._service = service;
@@ -24,6 +25,31 @@ namespace LastProject.API.Controllers
             var response = this._service.GetRecipe();
             return response;
         }
+
+
+        // GET: api/Cds
+        // [HttpGet]
+        // public async Task<ActionResult<GetRecipeResponse>> GetRecipeByIngredient (string searchByIngredient)
+        // {
+        //      var recipes = GetRecipe();   
+
+        //     var recipes = 
+        //         from c in
+        //         select c;
+
+        //     if (searchByIngredient == "")
+        //     {
+        //         cds = cds.OrderBy(c => c.Id);
+        //     }
+        //     else if(!String.IsNullOrEmpty(searchByIngredient))
+        //     {
+        //         cds = cds.Where((s => s.Genre.Name.Contains(searchByIngredient)));
+                
+        //         // add IF in case there are no vds for that genre! (List all CDs)
+        //     }
+            
+        //     return await cds.ToListAsync();
+        // }
     }
 
 }
