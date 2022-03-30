@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {IRecipe} from "../../Interfaces";
 
-function SingleDish() {
+const RecipeDetail = () => {
     const { id } = useParams();
-    const [singleDish, setSingleDish] = useState<IRecipe>();
-    const getDish = async () => {
+    const [recipe, setRecipe] = useState<IRecipe>();
+    const fetchRecipe = async () => {
         try {
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
             const data = await response.json();
@@ -74,7 +74,7 @@ function SingleDish() {
                     youtube,
                     ingredients,
                 };
-                setSingleDish(newDish);
+                setRecipe(newDish);
                 console.log(newDish);
             } 
         } catch (error) {
@@ -83,11 +83,11 @@ function SingleDish() {
     };
 
     useEffect(() => {
-        getDish();
+        fetchRecipe();
     }, [id]);
    
-    if (!singleDish) {
-        return <h2 className="section-title">No dish to display</h2>;
+    if (!recipe) {
+        return <h2>No recipe to display</h2>;
     } else {
         const {
             name,
@@ -98,7 +98,7 @@ function SingleDish() {
             image,
             ingredients,
             youtube,
-        } = singleDish;
+        } = recipe;
         return (
             <section>
                 <Link to="/">
@@ -123,9 +123,8 @@ function SingleDish() {
                         </p>
                     </div>
                 </div>
-            
             </section>
         );
     }
 }
-export default SingleDish;
+export default RecipeDetail;
