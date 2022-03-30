@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import RecipesBoard from "../RecipesBoard";
-import IRecipes from "../../Interfaces";
+import {IRecipes} from "../../Interfaces";
 import SearchForm from "../SearchForm";
 
 function Home() {

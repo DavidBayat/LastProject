@@ -1,5 +1,5 @@
 import React from 'react';
-import IRecipes from "../../Interfaces";
+import {IRecipes} from "../../Interfaces";
 import Recipe from "../Recipe";
 import './RecipesBoard.css';
 
