@@ -6,7 +6,6 @@ const RecipeDetail = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState<IRecipe>();
     const fetchRecipe = async () => {
-        try {
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
             const data = await response.json();
             const { meals } = data;
@@ -76,10 +75,7 @@ const RecipeDetail = () => {
                 };
                 setRecipe(newDish);
                 console.log(newDish);
-            } 
-        } catch (error) {
-            console.log(error);
-        }
+            }
     };
 
     useEffect(() => {
@@ -107,7 +103,6 @@ const RecipeDetail = () => {
                 <h2>{name}</h2>
                 <div>
                     <img src={image} alt={name} />
-
                     <div>
                         <p>
                             <span>name:</span> {name}
@@ -120,6 +115,19 @@ const RecipeDetail = () => {
                         </p>
                         <p>
                             <span>tags:</span> {tags ? tags : "meal"}
+                        </p>
+                        <p>
+                            <span>ingredients:</span>
+                            {ingredients.map((ingredient, index) => {
+                                if (index === ingredients.length - 1) {
+                                    return ingredient ? (
+                                        <span key={index}> {ingredient}</span>
+                                    ) : null;
+                                }
+                                return ingredient ? (
+                                    <span key={index}> {ingredient},</span>
+                                ) : null;
+                            })}
                         </p>
                     </div>
                 </div>
