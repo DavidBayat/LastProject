@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import {IRecipe} from "../../Interfaces";
+import {IIngredients, IRecipe} from "../../Interfaces";
+import YoutubeEmbedded from "../YoutubeEmbedded";
 
 const RecipeDetail = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState<IRecipe>();
+    const [readMore, setReadMore] = useState(false);
+
     const fetchRecipe = async () => {
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
             const data = await response.json();
@@ -18,52 +21,33 @@ const RecipeDetail = () => {
                     strTags: tags,
                     strMealThumb: image,
                     strYoutube: youtube,
-                    strIngredient1,
-                    strIngredient2,
-                    strIngredient3,
-                    strIngredient4,
-                    strIngredient5,
-                    strIngredient6,
-                    strIngredient7,
-                    strIngredient8,
-                    strIngredient9,
-                    strIngredient10,
-                    strIngredient11,
-                    strIngredient12,
-                    strIngredient13,
-                    strIngredient14,
-                    strIngredient15,
-                    strIngredient16,
-                    strIngredient17,
-                    strIngredient18,
-                    strIngredient19,
-                    strIngredient20,
                 } = meals[0];
+                const detail : IIngredients = meals[0];
                 const ingredients = [
-                    strIngredient1,
-                    strIngredient2,
-                    strIngredient3,
-                    strIngredient4,
-                    strIngredient5,
-                    strIngredient6,
-                    strIngredient7,
-                    strIngredient8,
-                    strIngredient9,
-                    strIngredient10,
-                    strIngredient11,
-                    strIngredient12,
-                    strIngredient13,
-                    strIngredient14,
-                    strIngredient15,
-                    strIngredient16,
-                    strIngredient17,
-                    strIngredient18,
-                    strIngredient19,
-                    strIngredient20,
+                    detail.strIngredient1,
+                    detail.strIngredient2,
+                    detail.strIngredient3,
+                    detail.strIngredient4,
+                    detail.strIngredient5,
+                    detail.strIngredient6,
+                    detail.strIngredient7,
+                    detail.strIngredient8,
+                    detail.strIngredient9,
+                    detail.strIngredient10,
+                    detail.strIngredient11,
+                    detail.strIngredient12,
+                    detail.strIngredient13,
+                    detail.strIngredient14,
+                    detail.strIngredient15,
+                    detail.strIngredient16,
+                    detail.strIngredient17,
+                    detail.strIngredient18,
+                    detail.strIngredient19,
+                    detail.strIngredient20,
                 ].filter( item => {
                     return item !== null && item !== "";
                 });
-                const newDish = {
+                const newRecipe = {
                     name,
                     category,
                     location,
@@ -73,8 +57,8 @@ const RecipeDetail = () => {
                     youtube,
                     ingredients,
                 };
-                setRecipe(newDish);
-                console.log(newDish);
+                setRecipe(newRecipe);
+                // console.log(newRecipe);
             }
     };
 
@@ -129,8 +113,21 @@ const RecipeDetail = () => {
                                 ) : null;
                             })}
                         </p>
+                        <p>
+                            <span>instruction:</span>
+                            {readMore ? instruction : `${instruction.substring(0, 300)}...`}
+                            <button onClick={() => setReadMore(!readMore)}>
+                                {readMore ? "show less" : "read more"}
+                            </button>
+                        </p>
                     </div>
                 </div>
+                <article>
+                    <h2>Instruction</h2>
+                    <div>
+                        <YoutubeEmbedded embedId={youtube.split("?v=")[1]} />
+                    </div>
+                </article>
             </section>
         );
     }
