@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {IIngredients, IRecipe} from "../../Interfaces";
 import YoutubeEmbedded from "../YoutubeEmbedded";
+import "./RecipeDetail.css"
 
 const RecipeDetail = () => {
     const { id } = useParams();
@@ -9,7 +10,7 @@ const RecipeDetail = () => {
     const [readMore, setReadMore] = useState(false);
 
     const fetchRecipe = async () => {
-            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+            const response = await fetch(`https://localhost:7137/api/Recipes/${id}`);
             const data = await response.json();
             const { meals } = data;
             if (meals) {
@@ -80,12 +81,12 @@ const RecipeDetail = () => {
             youtube,
         } = recipe;
         return (
-            <section>
+            <section className="recipe-section">
                 <Link to="/">
                     back home
                 </Link>
                 <h2>{name}</h2>
-                <div>
+                <div className="single-recipe">
                     <img src={image} alt={name} />
                     <div>
                         <p>
