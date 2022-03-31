@@ -1,3 +1,3 @@
 # LastProject
 
-We are creating shiiiieeet!!
+We are finally creating shiiiieeet!!
