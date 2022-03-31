@@ -15,6 +15,7 @@
   --smallWidth: 85vw;
   --maxWidth: 40rem;
   --fullWidth: 1170px;
+  --primaryColor: #dd443e;
 }
 * {
   margin: 0;

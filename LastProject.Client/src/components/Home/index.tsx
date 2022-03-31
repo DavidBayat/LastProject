@@ -8,9 +8,15 @@ function Home() {
     const [searchTermOne, setSearchTermOne] = useState("");
     const [searchTermTwo, setSearchTermTwo] = useState("");
     const [searchTermThree, setSearchTermThree] = useState("");
-
+    let url = "";
+    
     const fetchRecipes = useCallback(async () => {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchTermOne}`);
+        if (searchTermTwo === "" && searchTermThree === ""){
+            url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
+        }else if (searchTermThree === "") {
+            url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchTermOne}i2=`;
+        }
+        const response = await fetch(`${url}${searchTermOne}`);
         const data = await response.json();
         const { meals } = data;
         if(meals)
@@ -20,7 +26,7 @@ function Home() {
         {
             setRecipeList([]);
         }
-    }, [searchTermOne])
+    }, [searchTermOne, searchTermTwo,searchTermThree])
 
     useEffect(() => {
         fetchRecipes();

@@ -23,40 +23,44 @@ const SearchForm = ({setSearchTermOne, setSearchTermTwo, setSearchTermThree} : P
     return (
         <section className="section search">
             <form className="search-form" onSubmit={handleSubmit}>
-                <label>search recipes here</label>
-                <input 
-                    type="text"
-                    name="ingredientOne"
-                    id="ingredientOne"
-                    placeholder="Ingredient One"
-                    ref={searchValueOne}
-                    onChange={() => {
-                        if (searchValueOne && searchValueOne.current)
-                            setSearchTermOne(searchValueOne.current.value)
-                    }}
-                />                
-                <input 
-                    type="text"
-                    name="ingredientTwo"
-                    id="ingredientTwo"
-                    placeholder="Ingredient Two"
-                    ref={searchValueTwo}
-                    onChange={() => {
-                        if (searchValueTwo && searchValueTwo.current)
-                            setSearchTermTwo(searchValueTwo.current.value)
-                    }}
-                />               
-                <input 
-                    type="text"
-                    name="ingredientThree"
-                    id="ingredientThree"
-                    placeholder="Ingredient Three"
-                    ref={searchValueThree}
-                    onChange={() => {
-                        if (searchValueThree && searchValueThree.current)
-                            setSearchTermThree(searchValueThree.current.value)
-                    }}
-                />
+                <div className="form-control">
+                    <label>search ingredients here</label>
+                    <div className="input-control">
+                        <input 
+                            type="text"
+                            name="ingredientOne"
+                            id="ingredientOne"
+                            placeholder="Ingredient One"
+                            ref={searchValueOne}
+                            onChange={() => {
+                                if (searchValueOne && searchValueOne.current)
+                                    setSearchTermOne(searchValueOne.current.value)
+                            }}
+                        />                
+                        <input 
+                            type="text"
+                            name="ingredientTwo"
+                            id="ingredientTwo"
+                            placeholder="Ingredient Two"
+                            ref={searchValueTwo}
+                            onChange={() => {
+                                if (searchValueTwo && searchValueTwo.current)
+                                    setSearchTermTwo(searchValueTwo.current.value)
+                            }}
+                        />               
+                        <input 
+                            type="text"
+                            name="ingredientThree"
+                            id="ingredientThree"
+                            placeholder="Ingredient Three"
+                            ref={searchValueThree}
+                            onChange={() => {
+                                if (searchValueThree && searchValueThree.current)
+                                    setSearchTermThree(searchValueThree.current.value)
+                            }}
+                        />
+                    </div>
+                </div>
             </form>
         </section>
     );
