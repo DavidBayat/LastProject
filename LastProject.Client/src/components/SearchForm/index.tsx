@@ -34,7 +34,7 @@ const SearchForm = ({setSearchTermOne, setSearchTermTwo, setSearchTermThree} : P
                             ref={searchValueOne}
                             onChange={() => {
                                 if (searchValueOne && searchValueOne.current)
-                                    setSearchTermOne(searchValueOne.current.value)
+                                    setSearchTermOne(searchValueOne.current.value.charAt(0).toUpperCase() + searchValueOne.current.value.slice(1))
                             }}
                         />                
                         <input 
@@ -45,7 +45,7 @@ const SearchForm = ({setSearchTermOne, setSearchTermTwo, setSearchTermThree} : P
                             ref={searchValueTwo}
                             onChange={() => {
                                 if (searchValueTwo && searchValueTwo.current)
-                                    setSearchTermTwo(searchValueTwo.current.value)
+                                    setSearchTermTwo(searchValueTwo.current.value.charAt(0).toUpperCase() + searchValueTwo.current.value.slice(1))
                             }}
                         />               
                         <input 
@@ -56,7 +56,7 @@ const SearchForm = ({setSearchTermOne, setSearchTermTwo, setSearchTermThree} : P
                             ref={searchValueThree}
                             onChange={() => {
                                 if (searchValueThree && searchValueThree.current)
-                                    setSearchTermThree(searchValueThree.current.value)
+                                    setSearchTermThree(searchValueThree.current.value.charAt(0).toUpperCase() + searchValueThree.current.value.slice(1))
                             }}
                         />
                     </div>

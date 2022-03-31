@@ -11,12 +11,16 @@ function Home() {
     let url = "";
     
     const fetchRecipes = useCallback(async () => {
-        if (searchTermTwo === "" && searchTermThree === ""){
-            url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
-        }else if (searchTermThree === "") {
-            url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchTermOne}i2=`;
+        if (searchTermOne === "" && searchTermTwo === "" && searchTermThree === ""){
+            url = "https://localhost:7137/api/Recipes/ingredients";
+        }else if (searchTermTwo === "" && searchTermThree === "") {
+            url = `https://localhost:7137/api/Recipes/ingredients?searchByIngredient=${searchTermOne}`;
+        }else if (searchTermThree === ""){
+            url = `https://localhost:7137/api/Recipes/ingredients?searchByIngredient=${searchTermOne}&searchByIngredient2=${searchTermTwo}`;
+        }else{
+            url = `https://localhost:7137/api/Recipes/ingredients?searchByIngredient=${searchTermOne}&searchByIngredient2=${searchTermTwo}&searchByIngredient3=${searchTermThree}`;
         }
-        const response = await fetch(`${url}${searchTermOne}`);
+        const response = await fetch(url);
         const data = await response.json();
         const { meals } = data;
         if(meals)
@@ -30,7 +34,7 @@ function Home() {
 
     useEffect(() => {
         fetchRecipes();
-    },[searchTermOne, fetchRecipes]);
+    },[searchTermOne, searchTermTwo, searchTermThree, fetchRecipes]);
 
     return (
         <main>
