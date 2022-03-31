@@ -1,0 +1,14 @@
+.search {
+    margin-top: 1rem;
+    padding-bottom: 0;
+}
+.search-form {
+    width: var(--smallWidth);
+    max-width: var(--fullWidth);
+    margin: 0 auto;
+    background: var(--mainWhite);
+    padding: 2rem 2.5rem;
+    text-transform: capitalize;
+    border-radius: var(--mainBorderRadius);
+    box-shadow: var(--lightShadow);
+}
